@@ -8,12 +8,12 @@ HiveVision turns Limelight 3A neural network detections into absolute field coor
 
 | Artifact | Description |
 | --- | --- |
-| `org.hivevisionftc:core` | Limelight 3A reader, filtering, sorting, tracking, camera-to-field projection |
-| `org.hivevisionftc:weaver` | Detections into obstacle-avoiding Marrow Weaver paths, plus Pedro glue |
+| `io.github.sidhuharjas:core` | Limelight 3A reader, filtering, sorting, tracking, camera-to-field projection |
+| `io.github.sidhuharjas:weaver` | Detections into obstacle-avoiding Marrow Weaver paths, plus Pedro glue |
 
 ## Install
 
-`org.hivevisionftc` is not on Maven Central. The project's GitHub Pages site is the maven repository:
+The library is published to maven on the project's GitHub Pages site:
 
 ```
 https://sidhuharjas.github.io/HVV3TEST/
@@ -29,12 +29,12 @@ repositories {
 
 dependencies {
     // add:
-    implementation 'org.hivevisionftc:core:1.0.0'
-    implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
+    implementation 'io.github.sidhuharjas:core:1.0.0'
+    implementation 'io.github.sidhuharjas:weaver:1.0.0'   // optional
 }
 ```
 
-`mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses. To build and republish the library, follow [docs/setup.md](docs/setup.md): `gradle deployLocal`, copy into `docs/org/`, push.
+The group id is `io.github.sidhuharjas`, the Java packages you import stay `org.hivevisionftc.core` and `org.hivevisionftc.weaver`. `mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses.
 
 ## Quickstart
 
@@ -86,7 +86,7 @@ Units are inches and radians, in Pedro's field frame. `CircleZone`, `Point` and 
 ## Docs
 
 - [sidhuharjas.github.io/HVV3TEST](https://sidhuharjas.github.io/HVV3TEST/) this site
-- [docs/setup.md](docs/setup.md) end to end: maven repo, model, calibration, republishing
+- [docs/setup.md](docs/setup.md) end to end: maven install, model, calibration
 - [docs/MODULES.md](docs/MODULES.md) class reference
 - [docs/calibration.md](docs/calibration.md) measuring the camera and checking positions
 - [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs) full documentation

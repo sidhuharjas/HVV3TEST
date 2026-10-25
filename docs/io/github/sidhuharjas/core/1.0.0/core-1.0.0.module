@@ -1,7 +1,7 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "org.hivevisionftc",
+    "group": "io.github.sidhuharjas",
     "module": "core",
     "version": "1.0.0",
     "attributes": {
@@ -26,11 +26,11 @@
         {
           "name": "core-1.0.0.aar",
           "url": "core-1.0.0.aar",
-          "size": 14328,
-          "sha512": "a17105a9cd7394af54fd40b5d3776bf6658958404ed3452e7820df6763804ac5347c2f0be2bb86a7a317559a81b53e7b4acc2490e5bf8f65290688861e1de53d",
-          "sha256": "69f93a49f293ecaa9f3b1f270d756e4114cb8dcd593dc5a1cff059a9badbd8c6",
-          "sha1": "8ca11a5392089add7b4f7be970d25bfabc84c7c2",
-          "md5": "662fe47e3d824951b7b96db547ef673b"
+          "size": 14379,
+          "sha512": "b00ffc70fe23b61c8f18ad2206c297b61536679993eae21fc199780a72a2c2892f8e23253ee754b1dc36116bec2b668067c297d4d0daba9d00ae8440eaa9e28c",
+          "sha256": "3e9c55b9866f6ed6a5e37d55f76ed78d1aab1a2f7f017e65ea1c23b4b8b09338",
+          "sha1": "e8ccc8a5caf58b762e0b31d12e5ca91f3884b242",
+          "md5": "068e9c580a0c4b006b61ed297dc19dae"
         }
       ]
     },
@@ -46,11 +46,11 @@
         {
           "name": "core-1.0.0.aar",
           "url": "core-1.0.0.aar",
-          "size": 14328,
-          "sha512": "a17105a9cd7394af54fd40b5d3776bf6658958404ed3452e7820df6763804ac5347c2f0be2bb86a7a317559a81b53e7b4acc2490e5bf8f65290688861e1de53d",
-          "sha256": "69f93a49f293ecaa9f3b1f270d756e4114cb8dcd593dc5a1cff059a9badbd8c6",
-          "sha1": "8ca11a5392089add7b4f7be970d25bfabc84c7c2",
-          "md5": "662fe47e3d824951b7b96db547ef673b"
+          "size": 14379,
+          "sha512": "b00ffc70fe23b61c8f18ad2206c297b61536679993eae21fc199780a72a2c2892f8e23253ee754b1dc36116bec2b668067c297d4d0daba9d00ae8440eaa9e28c",
+          "sha256": "3e9c55b9866f6ed6a5e37d55f76ed78d1aab1a2f7f017e65ea1c23b4b8b09338",
+          "sha1": "e8ccc8a5caf58b762e0b31d12e5ca91f3884b242",
+          "md5": "068e9c580a0c4b006b61ed297dc19dae"
         }
       ]
     }

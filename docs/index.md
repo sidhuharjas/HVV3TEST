@@ -13,12 +13,12 @@ HiveVision turns Limelight 3A neural network detections into absolute field coor
 
 | Artifact | Description |
 | --- | --- |
-| `org.hivevisionftc:core` | Limelight 3A reader, filtering, sorting, tracking, camera-to-field projection |
-| `org.hivevisionftc:weaver` | Detections into obstacle-avoiding Marrow Weaver paths, plus Pedro glue |
+| `io.github.sidhuharjas:core` | Limelight 3A reader, filtering, sorting, tracking, camera-to-field projection |
+| `io.github.sidhuharjas:weaver` | Detections into obstacle-avoiding Marrow Weaver paths, plus Pedro glue |
 
 ## Install
 
-`org.hivevisionftc` is not on Maven Central. This site is the maven repository:
+The library is published to maven on this site:
 
 ```
 https://sidhuharjas.github.io/HVV3TEST/
@@ -34,14 +34,14 @@ repositories {
 
 dependencies {
     // add:
-    implementation 'org.hivevisionftc:core:1.0.0'
-    implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
+    implementation 'io.github.sidhuharjas:core:1.0.0'
+    implementation 'io.github.sidhuharjas:weaver:1.0.0'   // optional
 }
 ```
 
 Kotlin DSL: `maven(url = "https://sidhuharjas.github.io/HVV3TEST/")`.
 
-`mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Prerequisites, troubleshooting and republishing: [Setup](setup.html).
+The group id is `io.github.sidhuharjas`, the Java packages you import stay `org.hivevisionftc.core` and `org.hivevisionftc.weaver`. `mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Prerequisites, install and troubleshooting: [Setup](setup.html).
 
 ## Quickstart
 

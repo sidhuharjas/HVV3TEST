@@ -1,7 +1,7 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "org.hivevisionftc",
+    "group": "io.github.sidhuharjas",
     "module": "weaver",
     "version": "1.0.0",
     "attributes": {
@@ -24,7 +24,7 @@
       },
       "dependencies": [
         {
-          "group": "org.hivevisionftc",
+          "group": "io.github.sidhuharjas",
           "module": "core",
           "version": {
             "requires": "1.0.0"
@@ -42,11 +42,11 @@
         {
           "name": "weaver-1.0.0.aar",
           "url": "weaver-1.0.0.aar",
-          "size": 3363,
-          "sha512": "f662bd87c3808f85c723c52800ebf440e806239d55c0edb72c8fe4ed2577c3f981ad846167810f929cf48acae1b567ff5611a1a955242efdf565a6476b7ab965",
-          "sha256": "0116791291f008e91749570a39027760ae016a698ebe37b86273803eb61aa1b5",
-          "sha1": "5802227785c939444613d7e16e700246f13f808a",
-          "md5": "af49a921cf69577c3e88a9658073c394"
+          "size": 7811,
+          "sha512": "d974399bac203a377423b4df9f5c6574bcceadfb7453293c8f64d4176fa9573a633c6fe8819e7ccecf929bf69d614f23e484b3c26dfb3e1d06407fd83c3f625c",
+          "sha256": "d96cb85745e1fac3752ac905f98a1135767736250ca76050ab62f5f34673ab28",
+          "sha1": "34209177c99abf2248f3bf44508cc626a7f21353",
+          "md5": "d9ec205767870fcbdb481175d5d7ff18"
         }
       ]
     },
@@ -60,7 +60,7 @@
       },
       "dependencies": [
         {
-          "group": "org.hivevisionftc",
+          "group": "io.github.sidhuharjas",
           "module": "core",
           "version": {
             "requires": "1.0.0"
@@ -78,11 +78,11 @@
         {
           "name": "weaver-1.0.0.aar",
           "url": "weaver-1.0.0.aar",
-          "size": 3363,
-          "sha512": "f662bd87c3808f85c723c52800ebf440e806239d55c0edb72c8fe4ed2577c3f981ad846167810f929cf48acae1b567ff5611a1a955242efdf565a6476b7ab965",
-          "sha256": "0116791291f008e91749570a39027760ae016a698ebe37b86273803eb61aa1b5",
-          "sha1": "5802227785c939444613d7e16e700246f13f808a",
-          "md5": "af49a921cf69577c3e88a9658073c394"
+          "size": 7811,
+          "sha512": "d974399bac203a377423b4df9f5c6574bcceadfb7453293c8f64d4176fa9573a633c6fe8819e7ccecf929bf69d614f23e484b3c26dfb3e1d06407fd83c3f625c",
+          "sha256": "d96cb85745e1fac3752ac905f98a1135767736250ca76050ab62f5f34673ab28",
+          "sha1": "34209177c99abf2248f3bf44508cc626a7f21353",
+          "md5": "d9ec205767870fcbdb481175d5d7ff18"
         }
       ]
     }

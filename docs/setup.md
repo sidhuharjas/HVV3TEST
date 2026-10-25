@@ -18,7 +18,7 @@ This site is a test copy of the docs styling. The full guide lives in [hivevisio
 
 ## 1. Add the repository
 
-`org.hivevisionftc` is not on Maven Central. This site is the repository, so add one line to what your project already has:
+The artifacts are published to maven on this site. Add one line to what your project already has:
 
 ```groovy
 repositories {
@@ -35,19 +35,21 @@ If repositories live in `settings.gradle.kts` under `dependencyResolutionManagem
 ```groovy
 dependencies {
     // add these next to your existing ones:
-    implementation 'org.hivevisionftc:core:1.0.0'
-    implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
+    implementation 'io.github.sidhuharjas:core:1.0.0'
+    implementation 'io.github.sidhuharjas:weaver:1.0.0'   // optional
 }
 ```
 
+The group id is `io.github.sidhuharjas`. The Java packages you import stay `org.hivevisionftc.core` and `org.hivevisionftc.weaver`.
+
 | Coordinate | Resolves from |
 | --- | --- |
-| `org.hivevisionftc:core` | this site |
-| `org.hivevisionftc:weaver` | this site, pulls in `core` |
+| `io.github.sidhuharjas:core` | this site |
+| `io.github.sidhuharjas:weaver` | this site, pulls in `core` |
 | `com.skeletonarmyftc.marrow:core:1.2.2` | Maven Central, needed by `weaver` |
 | FTC SDK, Pedro Pathing | your project, `compileOnly` here |
 
-Sync the project. If Gradle reports that it cannot resolve `org.hivevisionftc:core`, the repository line is missing or misspelled.
+Sync the project. If Gradle reports that it cannot resolve `io.github.sidhuharjas:core`, the repository line is missing or misspelled.
 
 ## 3. Quickstart
 
@@ -108,7 +110,7 @@ Working OpModes: [AutoBallHuntOpMode.java](https://github.com/sidhuharjas/HVV3TE
 
 | Symptom | Fix |
 | --- | --- |
-| `Could not resolve org.hivevisionftc:core` | The `maven { url = ... }` line is missing or misspelled. It is not on Maven Central. |
+| `Could not resolve io.github.sidhuharjas:core` | The `maven { url = ... }` line is missing or misspelled. |
 | `Could not resolve com.skeletonarmyftc.marrow` | `mavenCentral()` was removed from your repositories, add it back. |
 | Compile errors about Pedro classes | Pedro is `compileOnly`, your project has to declare it. |
 | No detections | Limelight pipeline type must be `Neural Detector`, `labels.txt` uploaded, the class is in `setAllowedClasses(...)`, confidence not too high. |
@@ -119,14 +121,3 @@ Working OpModes: [AutoBallHuntOpMode.java](https://github.com/sidhuharjas/HVV3TE
 ## API reference
 
 [Modules](MODULES.html) lists every class in `core` and `weaver` with its purpose. Camera measurements: [Calibration](calibration.html). More examples: [docs/examples](https://github.com/sidhuharjas/HVV3TEST/tree/main/docs/examples). Full documentation: [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs).
-
-## Republishing, for maintainers
-
-1. Bump `version=` in `gradle.properties`.
-2. Run `gradle deployLocal` (or the `deployLocal` task in Android Studio).
-3. Copy `~/.m2/repository/org/hivevisionftc/<artifact>/<version>/` into `docs/org/hivevisionftc/<artifact>/<version>/` for `core` and `weaver`. That is the `.aar`, `.pom` and `.module`.
-4. Update `version` and `lastUpdated` in `docs/org/hivevisionftc/core/maven-metadata.xml` and `docs/org/hivevisionftc/weaver/maven-metadata.xml`.
-5. Push to `sidhuharjas/HVV3TEST`. Pages rebuilds from `main` and `/docs`.
-6. Verify: `https://sidhuharjas.github.io/HVV3TEST/org/hivevisionftc/core/<version>/core-<version>.pom`
-
-The pages themselves are plain markdown in `docs/`: `index.md`, `setup.md`, `MODULES.md`, `calibration.md`. Edit, push, they rebuild the same way.

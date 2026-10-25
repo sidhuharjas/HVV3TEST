@@ -5,7 +5,7 @@ title: Modules
 
 # Modules
 
-## core (`org.hivevisionftc:core`)
+## core (`io.github.sidhuharjas:core`)
 
 Depends on the FTC SDK (compileOnly). No Pedro or Marrow.
 
@@ -23,7 +23,7 @@ Depends on the FTC SDK (compileOnly). No Pedro or Marrow.
 | `limelight.LimelightSource` | Reads the detector pipeline of a Limelight 3A |
 | `Route<R>` | Interface used by `DetectionList.with(...)` |
 
-## weaver (`org.hivevisionftc:weaver`)
+## weaver (`io.github.sidhuharjas:weaver`)
 
 Depends on core and Marrow core (api). Pedro is compileOnly, the robot project supplies it.
 
