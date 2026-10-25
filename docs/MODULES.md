@@ -3,8 +3,6 @@ layout: default
 title: Modules
 ---
 
-[Home](./) · [Modules](MODULES.html) · [Calibration](calibration.html)
-
 # Modules
 
 ## core (`org.hivevisionftc:core`)
@@ -40,4 +38,4 @@ Zones, `Point`, `PathResult` and `PedroPathingConverter` are Marrow's own. Robot
 
 ## Model
 
-Hive Vision v2 SSD-MobileNetV2, classes in order yellow_pollen, red_nectar, blue_nectar. Upload `labels.txt` with the model so class names arrive as text. A model that reports a different label shows up in `unknownLabelCount()`.
+Hive Vision v2 SSD-MobileNetV2, classes in order yellow_pollen, red_nectar, blue_nectar. Upload `labels.txt` with the model so class names arrive as text. A model that reports a different label shows up in `unknownLabelCount()`. Getting the model: [Limelight 3A installation](https://hivevisionftc.github.io/HiveVisionDocs/installation/limelight/) in [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs), files in [hivevisionftc/Hive-Vision](https://github.com/hivevisionftc/Hive-Vision).

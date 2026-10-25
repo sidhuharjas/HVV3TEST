@@ -1,0 +1,90 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.hivevisionftc",
+    "module": "weaver",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.hivevisionftc",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.skeletonarmyftc.marrow",
+          "module": "core",
+          "version": {
+            "requires": "1.2.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "weaver-1.0.0.aar",
+          "url": "weaver-1.0.0.aar",
+          "size": 3363,
+          "sha512": "f662bd87c3808f85c723c52800ebf440e806239d55c0edb72c8fe4ed2577c3f981ad846167810f929cf48acae1b567ff5611a1a955242efdf565a6476b7ab965",
+          "sha256": "0116791291f008e91749570a39027760ae016a698ebe37b86273803eb61aa1b5",
+          "sha1": "5802227785c939444613d7e16e700246f13f808a",
+          "md5": "af49a921cf69577c3e88a9658073c394"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.hivevisionftc",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.skeletonarmyftc.marrow",
+          "module": "core",
+          "version": {
+            "requires": "1.2.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "weaver-1.0.0.aar",
+          "url": "weaver-1.0.0.aar",
+          "size": 3363,
+          "sha512": "f662bd87c3808f85c723c52800ebf440e806239d55c0edb72c8fe4ed2577c3f981ad846167810f929cf48acae1b567ff5611a1a955242efdf565a6476b7ab965",
+          "sha256": "0116791291f008e91749570a39027760ae016a698ebe37b86273803eb61aa1b5",
+          "sha1": "5802227785c939444613d7e16e700246f13f808a",
+          "md5": "af49a921cf69577c3e88a9658073c394"
+        }
+      ]
+    }
+  ]
+}

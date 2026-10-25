@@ -1,0 +1,58 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.hivevisionftc",
+    "module": "core",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "core-1.0.0.aar",
+          "url": "core-1.0.0.aar",
+          "size": 14328,
+          "sha512": "a17105a9cd7394af54fd40b5d3776bf6658958404ed3452e7820df6763804ac5347c2f0be2bb86a7a317559a81b53e7b4acc2490e5bf8f65290688861e1de53d",
+          "sha256": "69f93a49f293ecaa9f3b1f270d756e4114cb8dcd593dc5a1cff059a9badbd8c6",
+          "sha1": "8ca11a5392089add7b4f7be970d25bfabc84c7c2",
+          "md5": "662fe47e3d824951b7b96db547ef673b"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "core-1.0.0.aar",
+          "url": "core-1.0.0.aar",
+          "size": 14328,
+          "sha512": "a17105a9cd7394af54fd40b5d3776bf6658958404ed3452e7820df6763804ac5347c2f0be2bb86a7a317559a81b53e7b4acc2490e5bf8f65290688861e1de53d",
+          "sha256": "69f93a49f293ecaa9f3b1f270d756e4114cb8dcd593dc5a1cff059a9badbd8c6",
+          "sha1": "8ca11a5392089add7b4f7be970d25bfabc84c7c2",
+          "md5": "662fe47e3d824951b7b96db547ef673b"
+        }
+      ]
+    }
+  ]
+}

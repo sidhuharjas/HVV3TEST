@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  {% if page.description %}
+  <meta name="description" content="{{ page.description | escape }}">
+  {% else %}
+  <meta name="description" content="{{ site.description | escape }}">
+  {% endif %}
+  <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+  <script src="{{ '/honeycomb.js' | relative_url }}" type="module"></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="site-title" href="{{ '/' | relative_url }}">
+      <svg class="hex-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 1.75l8.66 5v10.5l-8.66 5-8.66-5V6.75z"></path>
+        <path d="M12 6.5l4.5 2.6v5.2L12 16.9l-4.5-2.6V9.1z" class="hex-inner"></path>
+      </svg>
+      <span>{{ site.title }}</span>
+    </a>
+    <nav class="navbar-links">
+      <a href="{{ '/setup.html' | relative_url }}">Setup</a>
+      <a href="{{ '/MODULES.html' | relative_url }}">Modules</a>
+      <a href="{{ '/calibration.html' | relative_url }}">Calibration</a>
+      <a class="gh-btn" href="https://github.com/sidhuharjas/HVV3TEST" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <aside class="sidebar">
+    <nav>
+      <p class="side-group">Docs</p>
+      <a class="side-link{% if page.url == '/' %} current{% endif %}" href="{{ '/' | relative_url }}">Home</a>
+      <a class="side-link{% if page.url == '/setup.html' %} current{% endif %}" href="{{ '/setup.html' | relative_url }}">Setup</a>
+      <a class="side-link{% if page.url == '/MODULES.html' %} current{% endif %}" href="{{ '/MODULES.html' | relative_url }}">Modules</a>
+      <a class="side-link{% if page.url == '/calibration.html' %} current{% endif %}" href="{{ '/calibration.html' | relative_url }}">Calibration</a>
+
+      <p class="side-group">Sources</p>
+      <a class="side-link" href="https://github.com/hivevisionftc/HiveVisionDocs" target="_blank" rel="noopener">Full documentation</a>
+      <a class="side-link" href="https://github.com/hivevisionftc/Hive-Vision" target="_blank" rel="noopener">Vision model</a>
+      <a class="side-link" href="https://github.com/sidhuharjas/HVV3TEST/tree/main/docs/examples" target="_blank" rel="noopener">OpMode examples</a>
+      <a class="side-link" href="https://github.com/sidhuharjas/HVV3TEST" target="_blank" rel="noopener">This repository</a>
+    </nav>
+  </aside>
+
+  <div class="layout">
+    <main class="content">
+      <article class="markdown">
+        {{ content }}
+      </article>
+    </main>
+    <footer class="footer">
+      <span>{{ site.title }} — FTC detection, field positioning and path routing</span>
+      <a href="https://github.com/sidhuharjas/HVV3TEST" target="_blank" rel="noopener">sidhuharjas/HVV3TEST</a>
+    </footer>
+  </div>
+</body>
+</html>

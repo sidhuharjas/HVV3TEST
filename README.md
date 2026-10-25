@@ -13,17 +13,22 @@ HiveVision turns Limelight 3A neural network detections into absolute field coor
 
 ## Install
 
-In this repo: `gradle deployLocal` (or the `deployLocal` task in Android Studio). Then in the robot project:
+`org.hivevisionftc` is not on Maven Central — it is hosted on the project's GitHub Pages as a maven repository. **Add** these to what the robot project already has (don't replace its existing `repositories`/`dependencies`):
 
-```
-repositories { mavenLocal() }
+```groovy
+repositories {
+    // keep what you already have, then ADD:
+    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/maven' }
+}
+
 dependencies {
+    // ADD:
     implementation 'org.hivevisionftc:core:1.0.0'
     implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
 }
 ```
 
-The built library lives on the computer that built it. Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses.
+`mavenCentral()` stays — `weaver` pulls `com.skeletonarmyftc.marrow:core` from Central. To build and publish a version yourself, see [docs/setup.md](docs/setup.md) (repo → `gradle deployLocal` → copy into `docs/maven/` → push). Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses.
 
 ## Quickstart
 
@@ -67,8 +72,10 @@ Units are inches and radians, in Pedro's field frame. `CircleZone`, `Point` and 
 ## Docs
 
 - [sidhuharjas.github.io/HVV3TEST](https://sidhuharjas.github.io/HVV3TEST/) this site
+- [docs/setup.md](docs/setup.md) end to end: maven repo, model, calibration, republishing
 - [docs/MODULES.md](docs/MODULES.md) class reference
 - [docs/calibration.md](docs/calibration.md) measuring the camera and checking positions
+- [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs) full documentation
 - [docs/examples/AutoBallHuntOpMode.java](docs/examples/AutoBallHuntOpMode.java) detect, route, drive
 
 ## Tests
