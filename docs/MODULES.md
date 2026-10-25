@@ -1,3 +1,10 @@
+---
+layout: default
+title: Modules
+---
+
+[Home](./) · [Modules](MODULES.html) · [Calibration](calibration.html)
+
 # Modules
 
 ## core (`org.hivevisionftc:core`)

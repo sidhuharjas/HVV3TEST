@@ -1,3 +1,10 @@
+---
+layout: default
+title: Calibration
+---
+
+[Home](./) · [Modules](MODULES.html) · [Calibration](calibration.html)
+
 # Calibration
 
 Field positions are only as good as four measurements. All lengths in inches.

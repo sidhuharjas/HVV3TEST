@@ -1,0 +1,7 @@
+title: HiveVision
+description: Camera-based detection, target filtering, field positioning, and Weaver path routing for FTC robots
+theme: jekyll-theme-cayman
+repository: sidhuharjas/HVV3TEST
+lang: en
+exclude:
+  - examples

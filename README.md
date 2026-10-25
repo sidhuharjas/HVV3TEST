@@ -66,6 +66,7 @@ Units are inches and radians, in Pedro's field frame. `CircleZone`, `Point` and 
 
 ## Docs
 
+- [sidhuharjas.github.io/HVV3TEST](https://sidhuharjas.github.io/HVV3TEST/) this site
 - [docs/MODULES.md](docs/MODULES.md) class reference
 - [docs/calibration.md](docs/calibration.md) measuring the camera and checking positions
 - [docs/examples/AutoBallHuntOpMode.java](docs/examples/AutoBallHuntOpMode.java) detect, route, drive
