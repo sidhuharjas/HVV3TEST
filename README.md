@@ -13,26 +13,40 @@ HiveVision turns Limelight 3A neural network detections into absolute field coor
 
 ## Install
 
-`org.hivevisionftc` is not on Maven Central — it is hosted on the project's GitHub Pages as a maven repository. **Add** these to what the robot project already has (don't replace its existing `repositories`/`dependencies`):
+`org.hivevisionftc` is not on Maven Central. The project's GitHub Pages site is the maven repository:
+
+```
+https://sidhuharjas.github.io/HVV3TEST/
+```
+
+Add these lines to what the robot project already has, and keep everything that is already there:
 
 ```groovy
 repositories {
-    // keep what you already have, then ADD:
-    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/maven' }
+    // keep what you already have, then add:
+    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/' }
 }
 
 dependencies {
-    // ADD:
+    // add:
     implementation 'org.hivevisionftc:core:1.0.0'
     implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
 }
 ```
 
-`mavenCentral()` stays — `weaver` pulls `com.skeletonarmyftc.marrow:core` from Central. To build and publish a version yourself, see [docs/setup.md](docs/setup.md) (repo → `gradle deployLocal` → copy into `docs/maven/` → push). Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses.
+`mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Set `ftcVersion`, `pedroVersion` and `marrowVersion` in `gradle.properties` to what the robot project uses. To build and republish the library, follow [docs/setup.md](docs/setup.md): `gradle deployLocal`, copy into `docs/org/`, push.
 
 ## Quickstart
 
 ```java
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.skeletonarmy.marrow.weaver.PathResult;
+import com.skeletonarmy.marrow.zones.CircleZone;
+import com.skeletonarmy.marrow.zones.Point;
+
+import org.hivevisionftc.core.*;
+import org.hivevisionftc.weaver.*;
+
 VisionConfig config = new VisionConfig()
         .camPitchDeg(25).camHeight(9.2).ballHeight(3)
         .camXOffset(4).camYOffset(0)
@@ -44,7 +58,7 @@ vision.setAllowedClasses(BiobuzzClasses.NECTAR_RED, BiobuzzClasses.NECTAR_BLUE);
 
 FieldPose pose = PedroBridge.poseOf(follower);
 
-Detection target = vision.detections().fetch(pose).sortByDistance().getClosest();
+Detection closest = vision.detections().fetch(pose).sortByDistance().getClosest();
 
 PathResult path = vision.detections().fetch(pose).sortByDistance()
         .with(WeaverRoute.fromFetchPose()

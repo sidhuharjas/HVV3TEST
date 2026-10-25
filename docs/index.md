@@ -18,34 +18,42 @@ HiveVision turns Limelight 3A neural network detections into absolute field coor
 
 ## Install
 
-`org.hivevisionftc` is **not on Maven Central** — it is hosted by this site as a maven repository:
+`org.hivevisionftc` is not on Maven Central. This site is the maven repository:
 
 ```
-https://sidhuharjas.github.io/HVV3TEST/maven
+https://sidhuharjas.github.io/HVV3TEST/
 ```
 
-**Add** these to what your robot project already has — do not replace your existing `repositories` or `dependencies` blocks, just add to them:
+Add these lines to what your robot project already has, and keep everything that is already there:
 
 ```groovy
 repositories {
-    // keep what you already have, then ADD:
-    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/maven' }
+    // keep what you already have, then add:
+    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/' }
 }
 
 dependencies {
-    // ADD:
+    // add:
     implementation 'org.hivevisionftc:core:1.0.0'
     implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
 }
 ```
 
-Kotlin DSL: `maven(url = "https://sidhuharjas.github.io/HVV3TEST/maven")`.
+Kotlin DSL: `maven(url = "https://sidhuharjas.github.io/HVV3TEST/")`.
 
-`mavenCentral()` stays too — `weaver` pulls `com.skeletonarmyftc.marrow:core` from Central. The FTC SDK and Pedro stay `compileOnly`; your project supplies them. Maintainers republishing the library: see [Setup](setup.html).
+`mavenCentral()` stays, `weaver` pulls `com.skeletonarmyftc.marrow:core` from there. The FTC SDK and Pedro stay `compileOnly`, your project supplies them. Prerequisites, troubleshooting and republishing: [Setup](setup.html).
 
 ## Quickstart
 
 ```java
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.skeletonarmy.marrow.weaver.PathResult;
+import com.skeletonarmy.marrow.zones.CircleZone;
+import com.skeletonarmy.marrow.zones.Point;
+
+import org.hivevisionftc.core.*;
+import org.hivevisionftc.weaver.*;
+
 VisionConfig config = new VisionConfig()
         .camPitchDeg(25).camHeight(9.2).ballHeight(3)
         .camXOffset(4).camYOffset(0)
@@ -57,7 +65,7 @@ vision.setAllowedClasses(BiobuzzClasses.NECTAR_RED, BiobuzzClasses.NECTAR_BLUE);
 
 FieldPose pose = PedroBridge.poseOf(follower);
 
-Detection target = vision.detections().fetch(pose).sortByDistance().getClosest();
+Detection closest = vision.detections().fetch(pose).sortByDistance().getClosest();
 
 PathResult path = vision.detections().fetch(pose).sortByDistance()
         .with(WeaverRoute.fromFetchPose()
@@ -84,11 +92,11 @@ Units are inches and radians, in Pedro's field frame. `CircleZone`, `Point` and 
 
 ## Docs
 
-- [Setup](setup.html) — dependency to first detection, end to end
-- [Modules](MODULES.html) — class reference for core and weaver
-- [Calibration](calibration.html) — measuring the camera and checking positions
-- Full documentation: [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs)
+- [Setup](setup.html): install, quickstart, troubleshooting
+- [Modules](MODULES.html): class reference for core and weaver
+- [Calibration](calibration.html): measuring the camera and checking positions
 - Examples: [AutoBallHuntOpMode.java](https://github.com/sidhuharjas/HVV3TEST/blob/main/docs/examples/AutoBallHuntOpMode.java), [ChaseBallOpMode.java](https://github.com/sidhuharjas/HVV3TEST/blob/main/docs/examples/ChaseBallOpMode.java)
+- Full documentation: [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs)
 
 ## Tests
 

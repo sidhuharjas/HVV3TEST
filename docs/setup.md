@@ -5,57 +5,65 @@ title: Setup
 
 # Setup
 
-End to end: dependency → camera model → config → first detection. This site is a test copy of the docs style; the full documentation lives in [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs), hosted at [hivevisionftc.github.io/HiveVisionDocs](https://hivevisionftc.github.io/HiveVisionDocs/).
+HiveVision reads a Limelight 3A, turns every detection into an absolute field coordinate and can route around obstacles to reach it. Add two Gradle lines, init the camera, read a detection. That takes about five minutes.
 
-## 1. Add the maven repository
+This site is a test copy of the docs styling. The full guide lives in [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs), hosted at [hivevisionftc.github.io/HiveVisionDocs](https://hivevisionftc.github.io/HiveVisionDocs/).
 
-`org.hivevisionftc` does not exist on Maven Central. It is served by this GitHub Pages site, so **add** one repo to what your project already has:
+## Prerequisites
+
+* An FTC robot project with Gradle. Your existing `google()` and `mavenCentral()` repositories stay as they are.
+* Java 17 to run Gradle and the Android plugin. The library itself is Java 8 bytecode, minSdk 24.
+* A Limelight 3A with the Hive Vision model loaded: [Limelight 3A installation](https://hivevisionftc.github.io/HiveVisionDocs/installation/limelight/).
+* Pedro Pathing 3 only if you drive with it. Marrow 1.2.2 only if you use `weaver`.
+
+## 1. Add the repository
+
+`org.hivevisionftc` is not on Maven Central. This site is the repository, so add one line to what your project already has:
 
 ```groovy
 repositories {
-    // keep everything you already have, then ADD this line:
-    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/maven' }
+    // keep everything you already have, then add:
+    maven { url = 'https://sidhuharjas.github.io/HVV3TEST/' }
 }
 ```
 
-If your repositories live in `settings.gradle.kts` under `dependencyResolutionManagement`, add it there instead:
-
-```kotlin
-maven(url = "https://sidhuharjas.github.io/HVV3TEST/maven")
-```
+Kotlin DSL: `maven(url = "https://sidhuharjas.github.io/HVV3TEST/")`.
+If repositories live in `settings.gradle.kts` under `dependencyResolutionManagement`, put the same line there.
 
 ## 2. Add the dependencies
 
 ```groovy
 dependencies {
-    // ADD these, next to your existing dependencies:
+    // add these next to your existing ones:
     implementation 'org.hivevisionftc:core:1.0.0'
-    implementation 'org.hivevisionftc:weaver:1.0.0'   // optional, needs Marrow
+    implementation 'org.hivevisionftc:weaver:1.0.0'   // optional
 }
 ```
 
-What resolves where:
-
-| Coordinate | Where it comes from |
+| Coordinate | Resolves from |
 | --- | --- |
-| `org.hivevisionftc:core` | this site (`/maven`) |
-| `org.hivevisionftc:weaver` | this site (`/maven`), and it depends on `core` |
-| `com.skeletonarmyftc.marrow:core:1.2.2` | Maven Central (already in your `repositories`) |
-| FTC SDK, Pedro Pathing | `compileOnly` — your project supplies them |
+| `org.hivevisionftc:core` | this site |
+| `org.hivevisionftc:weaver` | this site, pulls in `core` |
+| `com.skeletonarmyftc.marrow:core:1.2.2` | Maven Central, needed by `weaver` |
+| FTC SDK, Pedro Pathing | your project, `compileOnly` here |
 
-Nothing needs to be deleted or rewritten: `google()`, `mavenCentral()` and everything else you have stay exactly as they are.
+Sync the project. If Gradle reports that it cannot resolve `org.hivevisionftc:core`, the repository line is missing or misspelled.
 
-## 3. Limelight + the vision model
+## 3. Quickstart
 
-The Limelight 3A runs the Hive Vision SSD-MobileNetV2 detector on its own CPU. Getting the `tflite`, `labels.txt` and pipeline configured is covered in the main docs — follow [Limelight 3A installation](https://hivevisionftc.github.io/HiveVisionDocs/installation/limelight/) from [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs). The model files themselves are released in [hivevisionftc/Hive-Vision](https://github.com/hivevisionftc/Hive-Vision).
-
-## 4. Mount and calibrate the camera
-
-Measure `camHeight`, `camPitchDeg`, `camXOffset`, `camYOffset` and `ballHeight`, then verify against a measured position — see [Calibration](calibration.html).
-
-## 5. First detections
+Every class below comes from `org.hivevisionftc.core` or `org.hivevisionftc.weaver`.
 
 ```java
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+
+import org.hivevisionftc.core.BiobuzzClasses;
+import org.hivevisionftc.core.Detection;
+import org.hivevisionftc.core.FieldPose;
+import org.hivevisionftc.core.HiveVision;
+import org.hivevisionftc.core.VisionConfig;
+import org.hivevisionftc.weaver.PedroBridge;
+
+// inside your OpMode, after the follower exists
 VisionConfig config = new VisionConfig()
         .camPitchDeg(25).camHeight(9.2).ballHeight(3)
         .camXOffset(4).camYOffset(0)
@@ -66,31 +74,59 @@ HiveVision vision = new HiveVision(hardwareMap.get(Limelight3A.class, "limelight
 vision.setAllowedClasses(BiobuzzClasses.NECTAR_RED, BiobuzzClasses.NECTAR_BLUE);
 
 FieldPose pose = PedroBridge.poseOf(follower);
-Detection target = vision.detections().fetch(pose).sortByDistance().getClosest();
+Detection closest = vision.detections().fetch(pose).sortByDistance().getClosest();
+
+if (closest != null) {
+    telemetry.addData("x", closest.getX());
+    telemetry.addData("y", closest.getY());
+    telemetry.update();
+}
 ```
 
-Then routing, ball chasing and the OpMode examples from the [home page](./). Class reference: [Modules](MODULES.html).
+The camera numbers come from [Calibration](calibration.html). Units are inches and radians in Pedro's frame.
 
-## For maintainers: republishing the library
+## 4. Real use: chase a ball
 
-Every published version sits in `docs/maven/` inside this repo, so GitHub Pages *is* the repository. To ship a new version:
+```java
+import org.hivevisionftc.weaver.BallChaser;
+import org.hivevisionftc.weaver.PedroBridge;
+
+BallChaser chaser = new BallChaser(vision, PedroBridge.drive(follower)).stopDistanceIn(8);
+
+// each loop, after follower.update()
+if (chaser.update() == BallChaser.State.ARRIVED) {
+    // run the intake, then
+    chaser.next();
+}
+```
+
+It locks one ball, plans a path to a spot `stopDistanceIn` short of it, and replans only when the ball moves or the path runs out. States: `SEARCHING`, `CHASING`, `ARRIVED`, `BLOCKED`.
+
+Working OpModes: [AutoBallHuntOpMode.java](https://github.com/sidhuharjas/HVV3TEST/blob/main/docs/examples/AutoBallHuntOpMode.java) detects and routes, [ChaseBallOpMode.java](https://github.com/sidhuharjas/HVV3TEST/blob/main/docs/examples/ChaseBallOpMode.java) chases.
+
+## Troubleshooting
+
+| Symptom | Fix |
+| --- | --- |
+| `Could not resolve org.hivevisionftc:core` | The `maven { url = ... }` line is missing or misspelled. It is not on Maven Central. |
+| `Could not resolve com.skeletonarmyftc.marrow` | `mavenCentral()` was removed from your repositories, add it back. |
+| Compile errors about Pedro classes | Pedro is `compileOnly`, your project has to declare it. |
+| No detections | Limelight pipeline type must be `Neural Detector`, `labels.txt` uploaded, the class is in `setAllowedClasses(...)`, confidence not too high. |
+| Positions off by a constant | Check [Calibration](calibration.html): `camPitchDeg`, `camHeight`, offsets. |
+| Positions spin when the robot turns | Heading must be in radians, not degrees. |
+| Detections flicker or lag | Lower `minConfidence`, raise `maxStalenessMs`, make `pipeline` match the Limelight pipeline number. |
+
+## API reference
+
+[Modules](MODULES.html) lists every class in `core` and `weaver` with its purpose. Camera measurements: [Calibration](calibration.html). More examples: [docs/examples](https://github.com/sidhuharjas/HVV3TEST/tree/main/docs/examples). Full documentation: [hivevisionftc/HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs).
+
+## Republishing, for maintainers
 
 1. Bump `version=` in `gradle.properties`.
-2. Build and publish to your local maven: `gradle deployLocal` (or the `deployLocal` task in Android Studio). Also set `ftcVersion`, `pedroVersion` and `marrowVersion` to what the robot project uses.
-3. Copy the published files in:
+2. Run `gradle deployLocal` (or the `deployLocal` task in Android Studio).
+3. Copy `~/.m2/repository/org/hivevisionftc/<artifact>/<version>/` into `docs/org/hivevisionftc/<artifact>/<version>/` for `core` and `weaver`. That is the `.aar`, `.pom` and `.module`.
+4. Update `version` and `lastUpdated` in `docs/org/hivevisionftc/core/maven-metadata.xml` and `docs/org/hivevisionftc/weaver/maven-metadata.xml`.
+5. Push to `sidhuharjas/HVV3TEST`. Pages rebuilds from `main` and `/docs`.
+6. Verify: `https://sidhuharjas.github.io/HVV3TEST/org/hivevisionftc/core/<version>/core-<version>.pom`
 
-   ```
-   ~/.m2/repository/org/hivevisionftc/core/<version>/   →  docs/maven/org/hivevisionftc/core/<version>/
-   ~/.m2/repository/org/hivevisionftc/weaver/<version>/ →  docs/maven/org/hivevisionftc/weaver/<version>/
-   ```
-
-   That is the `.aar`, `.pom` and `.module` for each artifact.
-4. Update `<version>` and `lastUpdated` in `docs/maven/org/hivevisionftc/core/maven-metadata.xml` and `.../weaver/maven-metadata.xml`.
-5. Commit and push to `sidhuharjas/HVV3TEST`. GitHub Pages builds from `main` → `/docs` (Settings → Pages) and the new version is resolvable within a minute or two.
-6. Check it arrived:
-
-   ```
-   https://sidhuharjas.github.io/HVV3TEST/maven/org/hivevisionftc/core/<version>/core-<version>.pom
-   ```
-
-This site's own docs (`index.md`, `setup.md`, `MODULES.md`, `calibration.md`) are plain markdown in `docs/`, styled after [HiveVisionDocs](https://github.com/hivevisionftc/HiveVisionDocs). Edit those, push, and the pages rebuild the same way.
+The pages themselves are plain markdown in `docs/`: `index.md`, `setup.md`, `MODULES.md`, `calibration.md`. Edit, push, they rebuild the same way.
